@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://120.53.24.212:33306/bill
+    data-username: root
+    data-password: 321261949
+
+mybatis:
+  mapper-locations:
+    - classpath:mappper/*.xml
+    - classpath*:com/**/mapper/*.xml

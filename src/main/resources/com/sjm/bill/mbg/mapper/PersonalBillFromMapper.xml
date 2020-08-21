@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjm.bill.mbg.mapper.PersonalBillFromMapper">
+  <resultMap id="BaseResultMap" type="com.sjm.bill.mbg.model.PersonalBillFrom">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="NAME" jdbcType="BIGINT" property="name" />
+    <result column="PRICE" jdbcType="DOUBLE" property="price" />
+    <result column="AMOUNT" jdbcType="DOUBLE" property="amount" />
+    <result column="MAIN_ID" jdbcType="BIGINT" property="mainId" />
+    <result column="LABEL" jdbcType="VARCHAR" property="label" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, NAME, PRICE, AMOUNT, MAIN_ID, LABEL, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.sjm.bill.mbg.model.PersonalBillFromExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PERSONAL_BILL_FROM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PERSONAL_BILL_FROM
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from PERSONAL_BILL_FROM
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sjm.bill.mbg.model.PersonalBillFromExample">
+    delete from PERSONAL_BILL_FROM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sjm.bill.mbg.model.PersonalBillFrom">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into PERSONAL_BILL_FROM (NAME, PRICE, AMOUNT, 
+      MAIN_ID, LABEL, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{name,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
+      #{mainId,jdbcType=BIGINT}, #{label,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjm.bill.mbg.model.PersonalBillFrom">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into PERSONAL_BILL_FROM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="amount != null">
+        AMOUNT,
+      </if>
+      <if test="mainId != null">
+        MAIN_ID,
+      </if>
+      <if test="label != null">
+        LABEL,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="mainId != null">
+        #{mainId,jdbcType=BIGINT},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sjm.bill.mbg.model.PersonalBillFromExample" resultType="java.lang.Integer">
+    select count(*) from PERSONAL_BILL_FROM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PERSONAL_BILL_FROM
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=BIGINT},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.amount != null">
+        AMOUNT = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mainId != null">
+        MAIN_ID = #{record.mainId,jdbcType=BIGINT},
+      </if>
+      <if test="record.label != null">
+        LABEL = #{record.label,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PERSONAL_BILL_FROM
+    set ID = #{record.id,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=BIGINT},
+      PRICE = #{record.price,jdbcType=DOUBLE},
+      AMOUNT = #{record.amount,jdbcType=DOUBLE},
+      MAIN_ID = #{record.mainId,jdbcType=BIGINT},
+      LABEL = #{record.label,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      UPDATE_TIME = #{record.updateTime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjm.bill.mbg.model.PersonalBillFrom">
+    update PERSONAL_BILL_FROM
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="mainId != null">
+        MAIN_ID = #{mainId,jdbcType=BIGINT},
+      </if>
+      <if test="label != null">
+        LABEL = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjm.bill.mbg.model.PersonalBillFrom">
+    update PERSONAL_BILL_FROM
+    set NAME = #{name,jdbcType=BIGINT},
+      PRICE = #{price,jdbcType=DOUBLE},
+      AMOUNT = #{amount,jdbcType=DOUBLE},
+      MAIN_ID = #{mainId,jdbcType=BIGINT},
+      LABEL = #{label,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      UPDATE_TIME = #{updateTime,jdbcType=DATE}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
