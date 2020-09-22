@@ -6,6 +6,7 @@ spring:
     url: jdbc:mysql://120.53.24.212:33306/bill
     data-username: root
     data-password: 321261949
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   mapper-locations:

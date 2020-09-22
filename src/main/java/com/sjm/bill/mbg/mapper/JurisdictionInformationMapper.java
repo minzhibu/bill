@@ -2,8 +2,9 @@ package com.sjm.bill.mbg.mapper;
 
 import com.sjm.bill.mbg.model.JurisdictionInformation;
 import com.sjm.bill.mbg.model.JurisdictionInformationExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface JurisdictionInformationMapper {
     int countByExample(JurisdictionInformationExample example);
@@ -27,4 +28,10 @@ public interface JurisdictionInformationMapper {
     int updateByPrimaryKeySelective(JurisdictionInformation record);
 
     int updateByPrimaryKey(JurisdictionInformation record);
+
+    /**
+     * 查询该表的树形结构
+     * @return
+     */
+    List<JurisdictionInformation> selectByTree();
 }

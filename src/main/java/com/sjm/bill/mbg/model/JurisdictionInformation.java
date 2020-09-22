@@ -36,7 +36,16 @@ public class JurisdictionInformation implements Serializable {
      *
      * @mbggenerated
      */
-    private String url;
+    private String link;
+
+    /**
+     * 图标
+     *
+     * @mbggenerated
+     */
+    private String labelName;
+
+    private Boolean isShow;
 
     private static final long serialVersionUID = 1L;
 
@@ -72,12 +81,28 @@ public class JurisdictionInformation implements Serializable {
         this.isModify = isModify;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLink() {
+        return link;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getLabelName() {
+        return labelName;
+    }
+
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
+    }
+
+    public Boolean getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(Boolean isShow) {
+        this.isShow = isShow;
     }
 
     @Override
@@ -90,7 +115,9 @@ public class JurisdictionInformation implements Serializable {
         sb.append(", jurisdictionName=").append(jurisdictionName);
         sb.append(", parentNodeId=").append(parentNodeId);
         sb.append(", isModify=").append(isModify);
-        sb.append(", url=").append(url);
+        sb.append(", link=").append(link);
+        sb.append(", labelName=").append(labelName);
+        sb.append(", isShow=").append(isShow);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

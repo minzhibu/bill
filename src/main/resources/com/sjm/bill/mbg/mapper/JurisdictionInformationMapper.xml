@@ -6,7 +6,9 @@
     <result column="JURISDICTION_NAME" jdbcType="VARCHAR" property="jurisdictionName" />
     <result column="PARENT_NODE_ID" jdbcType="BIGINT" property="parentNodeId" />
     <result column="IS_MODIFY" jdbcType="INTEGER" property="isModify" />
-    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="LINK" jdbcType="VARCHAR" property="link" />
+    <result column="LABEL_NAME" jdbcType="VARCHAR" property="labelName" />
+    <result column="IS_SHOW" jdbcType="BIT" property="isShow" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, JURISDICTION_NAME, PARENT_NODE_ID, IS_MODIFY, URL
+    ID, JURISDICTION_NAME, PARENT_NODE_ID, IS_MODIFY, LINK, LABEL_NAME, IS_SHOW
   </sql>
   <select id="selectByExample" parameterType="com.sjm.bill.mbg.model.JurisdictionInformationExample" resultMap="BaseResultMap">
     select
@@ -104,9 +106,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into JURISDICTION_INFORMATION (JURISDICTION_NAME, PARENT_NODE_ID, IS_MODIFY, 
-      URL)
+      LINK, LABEL_NAME, IS_SHOW
+      )
     values (#{jurisdictionName,jdbcType=VARCHAR}, #{parentNodeId,jdbcType=BIGINT}, #{isModify,jdbcType=INTEGER}, 
-      #{url,jdbcType=VARCHAR})
+      #{link,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, #{isShow,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sjm.bill.mbg.model.JurisdictionInformation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -123,8 +127,14 @@
       <if test="isModify != null">
         IS_MODIFY,
       </if>
-      <if test="url != null">
-        URL,
+      <if test="link != null">
+        LINK,
+      </if>
+      <if test="labelName != null">
+        LABEL_NAME,
+      </if>
+      <if test="isShow != null">
+        IS_SHOW,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -137,8 +147,14 @@
       <if test="isModify != null">
         #{isModify,jdbcType=INTEGER},
       </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="labelName != null">
+        #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -163,8 +179,14 @@
       <if test="record.isModify != null">
         IS_MODIFY = #{record.isModify,jdbcType=INTEGER},
       </if>
-      <if test="record.url != null">
-        URL = #{record.url,jdbcType=VARCHAR},
+      <if test="record.link != null">
+        LINK = #{record.link,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelName != null">
+        LABEL_NAME = #{record.labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isShow != null">
+        IS_SHOW = #{record.isShow,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -177,7 +199,9 @@
       JURISDICTION_NAME = #{record.jurisdictionName,jdbcType=VARCHAR},
       PARENT_NODE_ID = #{record.parentNodeId,jdbcType=BIGINT},
       IS_MODIFY = #{record.isModify,jdbcType=INTEGER},
-      URL = #{record.url,jdbcType=VARCHAR}
+      LINK = #{record.link,jdbcType=VARCHAR},
+      LABEL_NAME = #{record.labelName,jdbcType=VARCHAR},
+      IS_SHOW = #{record.isShow,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -194,8 +218,14 @@
       <if test="isModify != null">
         IS_MODIFY = #{isModify,jdbcType=INTEGER},
       </if>
-      <if test="url != null">
-        URL = #{url,jdbcType=VARCHAR},
+      <if test="link != null">
+        LINK = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="labelName != null">
+        LABEL_NAME = #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        IS_SHOW = #{isShow,jdbcType=BIT},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
@@ -205,7 +235,9 @@
     set JURISDICTION_NAME = #{jurisdictionName,jdbcType=VARCHAR},
       PARENT_NODE_ID = #{parentNodeId,jdbcType=BIGINT},
       IS_MODIFY = #{isModify,jdbcType=INTEGER},
-      URL = #{url,jdbcType=VARCHAR}
+      LINK = #{link,jdbcType=VARCHAR},
+      LABEL_NAME = #{labelName,jdbcType=VARCHAR},
+      IS_SHOW = #{isShow,jdbcType=BIT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
