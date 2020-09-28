@@ -8,7 +8,7 @@ public class JurisdictionInformation implements Serializable {
      *
      * @mbggenerated
      */
-    private Long id;
+    private String id;
 
     /**
      * 权限结点名称
@@ -47,13 +47,20 @@ public class JurisdictionInformation implements Serializable {
 
     private Boolean isShow;
 
+    /**
+     * 节点优先级，越小越靠前
+     *
+     * @mbggenerated
+     */
+    private Long priority;
+
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -105,6 +112,14 @@ public class JurisdictionInformation implements Serializable {
         this.isShow = isShow;
     }
 
+    public Long getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Long priority) {
+        this.priority = priority;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -118,6 +133,7 @@ public class JurisdictionInformation implements Serializable {
         sb.append(", link=").append(link);
         sb.append(", labelName=").append(labelName);
         sb.append(", isShow=").append(isShow);
+        sb.append(", priority=").append(priority);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

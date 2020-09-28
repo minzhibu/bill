@@ -240,4 +240,18 @@
       EXT1 = #{ext1,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectPage" resultMap="BaseResultMap">
+    SELECT
+        ID,ROLE_NAME,CREATE_TIME,UPDATE_TIME,STATE,DEFAULT_ROLE,EXT1
+    FROM
+        ROLE_INFORMATION
+    LIMIT #{page},#{size};
+  </select>
+
+  <select id="count" resultType="java.lang.Integer">
+    SELECT
+        count(1)
+    FROM
+        ROLE_INFORMATION
+  </select>
 </mapper>

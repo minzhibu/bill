@@ -2,8 +2,9 @@ package com.sjm.bill.mbg.mapper;
 
 import com.sjm.bill.mbg.model.RoleInformation;
 import com.sjm.bill.mbg.model.RoleInformationExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RoleInformationMapper {
     int countByExample(RoleInformationExample example);
@@ -27,4 +28,9 @@ public interface RoleInformationMapper {
     int updateByPrimaryKeySelective(RoleInformation record);
 
     int updateByPrimaryKey(RoleInformation record);
+
+
+    List<RoleInformation> selectPage(@Param("page") int page, @Param("size") int size);
+
+    Integer count();
 }

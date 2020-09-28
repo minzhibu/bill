@@ -553,6 +553,66 @@ public class JurisdictionInformationExample {
             addCriterion("IS_SHOW not between", value1, value2, "isShow");
             return (Criteria) this;
         }
+
+        public Criteria andPriorityIsNull() {
+            addCriterion("PRIORITY is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIsNotNull() {
+            addCriterion("PRIORITY is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityEqualTo(Long value) {
+            addCriterion("PRIORITY =", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotEqualTo(Long value) {
+            addCriterion("PRIORITY <>", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityGreaterThan(Long value) {
+            addCriterion("PRIORITY >", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityGreaterThanOrEqualTo(Long value) {
+            addCriterion("PRIORITY >=", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityLessThan(Long value) {
+            addCriterion("PRIORITY <", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityLessThanOrEqualTo(Long value) {
+            addCriterion("PRIORITY <=", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIn(List<Long> values) {
+            addCriterion("PRIORITY in", values, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotIn(List<Long> values) {
+            addCriterion("PRIORITY not in", values, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityBetween(Long value1, Long value2) {
+            addCriterion("PRIORITY between", value1, value2, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotBetween(Long value1, Long value2) {
+            addCriterion("PRIORITY not between", value1, value2, "priority");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

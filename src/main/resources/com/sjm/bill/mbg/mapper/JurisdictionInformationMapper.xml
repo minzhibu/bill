@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sjm.bill.mbg.mapper.JurisdictionInformationMapper">
   <resultMap id="BaseResultMap" type="com.sjm.bill.mbg.model.JurisdictionInformation">
-    <id column="ID" jdbcType="BIGINT" property="id" />
+    <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="JURISDICTION_NAME" jdbcType="VARCHAR" property="jurisdictionName" />
     <result column="PARENT_NODE_ID" jdbcType="BIGINT" property="parentNodeId" />
     <result column="IS_MODIFY" jdbcType="INTEGER" property="isModify" />
     <result column="LINK" jdbcType="VARCHAR" property="link" />
     <result column="LABEL_NAME" jdbcType="VARCHAR" property="labelName" />
     <result column="IS_SHOW" jdbcType="BIT" property="isShow" />
+    <result column="PRIORITY" jdbcType="BIGINT" property="priority" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, JURISDICTION_NAME, PARENT_NODE_ID, IS_MODIFY, LINK, LABEL_NAME, IS_SHOW
+    ID, JURISDICTION_NAME, PARENT_NODE_ID, IS_MODIFY, LINK, LABEL_NAME, IS_SHOW, PRIORITY
   </sql>
   <select id="selectByExample" parameterType="com.sjm.bill.mbg.model.JurisdictionInformationExample" resultMap="BaseResultMap">
     select
@@ -102,15 +103,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sjm.bill.mbg.model.JurisdictionInformation">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into JURISDICTION_INFORMATION (JURISDICTION_NAME, PARENT_NODE_ID, IS_MODIFY, 
-      LINK, LABEL_NAME, IS_SHOW
-      )
-    values (#{jurisdictionName,jdbcType=VARCHAR}, #{parentNodeId,jdbcType=BIGINT}, #{isModify,jdbcType=INTEGER}, 
-      #{link,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, #{isShow,jdbcType=BIT}
-      )
+    insert into JURISDICTION_INFORMATION (ID,JURISDICTION_NAME, PARENT_NODE_ID, IS_MODIFY,
+      LINK, LABEL_NAME, IS_SHOW, 
+      PRIORITY)
+    values (#{id,jdbcType=VARCHAR},#{jurisdictionName,jdbcType=VARCHAR}, #{parentNodeId,jdbcType=BIGINT}, #{isModify,jdbcType=INTEGER},
+      #{link,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, #{isShow,jdbcType=BIT}, 
+      #{priority,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.sjm.bill.mbg.model.JurisdictionInformation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -136,6 +137,9 @@
       <if test="isShow != null">
         IS_SHOW,
       </if>
+      <if test="priority != null">
+        PRIORITY,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="jurisdictionName != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="isShow != null">
         #{isShow,jdbcType=BIT},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.isShow != null">
         IS_SHOW = #{record.isShow,jdbcType=BIT},
       </if>
+      <if test="record.priority != null">
+        PRIORITY = #{record.priority,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       IS_MODIFY = #{record.isModify,jdbcType=INTEGER},
       LINK = #{record.link,jdbcType=VARCHAR},
       LABEL_NAME = #{record.labelName,jdbcType=VARCHAR},
-      IS_SHOW = #{record.isShow,jdbcType=BIT}
+      IS_SHOW = #{record.isShow,jdbcType=BIT},
+      PRIORITY = #{record.priority,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="isShow != null">
         IS_SHOW = #{isShow,jdbcType=BIT},
       </if>
+      <if test="priority != null">
+        PRIORITY = #{priority,jdbcType=BIGINT},
+      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -237,7 +251,45 @@
       IS_MODIFY = #{isModify,jdbcType=INTEGER},
       LINK = #{link,jdbcType=VARCHAR},
       LABEL_NAME = #{labelName,jdbcType=VARCHAR},
-      IS_SHOW = #{isShow,jdbcType=BIT}
+      IS_SHOW = #{isShow,jdbcType=BIT},
+      PRIORITY = #{priority,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <!--查询树形-->
+  <resultMap id="TreeResultMap" type="com.sjm.bill.dto.JurisdictionInformationDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="jurisdiction_name" jdbcType="VARCHAR" property="jurisdictionName" />
+    <result column="parent_node_id" jdbcType="BIGINT" property="parentNodeId" />
+    <result column="is_modify" jdbcType="INTEGER" property="isModify" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="label_name" jdbcType="VARCHAR" property="labelName" />
+    <result column="is_show" jdbcType="BIT" property="isShow" />
+    <result column="priority" jdbcType="BIGINT" property="priority" />
+    <collection ofType="com.sjm.bill.mbg.model.JurisdictionInformation" property="childs">
+      <id column="cid" jdbcType="BIGINT" property="id" />
+      <result column="cjurisdiction_name" jdbcType="VARCHAR" property="jurisdictionName" />
+      <result column="cparent_node_id" jdbcType="BIGINT" property="parentNodeId" />
+      <result column="cis_modify" jdbcType="INTEGER" property="isModify" />
+      <result column="clink" jdbcType="VARCHAR" property="link" />
+      <result column="clabel_name" jdbcType="VARCHAR" property="labelName" />
+      <result column="cis_show" jdbcType="BIT" property="isShow" />
+      <result column="cpriority" jdbcType="BIGINT" property="priority" />
+    </collection>
+  </resultMap>
+  <select id="selectByTree" parameterType="com.sjm.bill.mbg.model.JurisdictionInformation" resultMap="TreeResultMap">
+    SELECT p.ID AS id, p.JURISDICTION_NAME AS jurisdiction_name,p.PARENT_NODE_ID AS parent_node_id,p.IS_MODIFY AS is_modify,
+    p.LINK AS link, p.LABEL_NAME AS label_name, p.IS_SHOW AS is_show,p.PRIORITY AS priority, c.ID AS cid, c.JURISDICTION_NAME AS cjurisdiction_name,
+    c.PARENT_NODE_ID AS cparent_node_id,c.IS_MODIFY AS cis_modify,c.LINK AS clink, c.LABEL_NAME AS clabel_name, c.IS_SHOW AS cis_show,c.PRIORITY AS cpriority
+    FROM JURISDICTION_INFORMATION p
+    LEFT JOIN JURISDICTION_INFORMATION c
+    ON p.id = c.parent_node_id
+    WHERE p.parent_node_id = -1
+    <if test="id != null">
+      and p.id = #{id,jdbcType=BIGINT}
+    </if>
+    ORDER BY priority ASC ,cpriority ASC
+  </select>
+
+
+
 </mapper>

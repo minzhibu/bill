@@ -1,5 +1,6 @@
 package com.sjm.bill.mbg.mapper;
 
+import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.mbg.model.JurisdictionInformation;
 import com.sjm.bill.mbg.model.JurisdictionInformationExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,10 +29,6 @@ public interface JurisdictionInformationMapper {
     int updateByPrimaryKeySelective(JurisdictionInformation record);
 
     int updateByPrimaryKey(JurisdictionInformation record);
-
-    /**
-     * 查询该表的树形结构
-     * @return
-     */
-    List<JurisdictionInformation> selectByTree();
+    
+    List<JurisdictionInformationDTO> selectByTree(JurisdictionInformation jurisdictionInformation);
 }
