@@ -1,7 +1,10 @@
 package com.sjm.bill.server;
 
+import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.mbg.model.RoleInformation;
+
+import java.util.List;
 
 public interface RoleInformationServer {
     /**
@@ -31,5 +34,11 @@ public interface RoleInformationServer {
      */
     void delete(Long id);
 
+
+    /**
+     * 根据id查询该角色的权限
+     * @return
+     */
+    List<JurisdictionInformationDTO> selectByIdToJurisdiction(Long id);
 
 }

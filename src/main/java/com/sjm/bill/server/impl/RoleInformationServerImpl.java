@@ -1,5 +1,6 @@
 package com.sjm.bill.server.impl;
 
+import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.mbg.mapper.RoleInformationMapper;
 import com.sjm.bill.mbg.model.RoleInformation;
@@ -25,6 +26,7 @@ public class RoleInformationServerImpl implements RoleInformationServer {
         Integer count = roleInformationMapper.count();
         PaginationDTO<RoleInformation> paginationDTO = new PaginationDTO<>();
         paginationDTO.setPagination(count,page,size);
+        paginationDTO.setQuestions(roleInformations);
         return paginationDTO;
     }
 
@@ -47,5 +49,10 @@ public class RoleInformationServerImpl implements RoleInformationServer {
     @Override
     public void delete(Long id) {
         roleInformationMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<JurisdictionInformationDTO> selectByIdToJurisdiction(Long id) {
+        return roleInformationMapper.selectByIdToJurisdiction(id);
     }
 }
