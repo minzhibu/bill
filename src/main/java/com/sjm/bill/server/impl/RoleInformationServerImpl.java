@@ -12,8 +12,11 @@ import java.util.List;
 
 @Service
 public class RoleInformationServerImpl implements RoleInformationServer {
-    @Autowired
-    private RoleInformationMapper roleInformationMapper;
+    private final RoleInformationMapper roleInformationMapper;
+
+    public RoleInformationServerImpl(RoleInformationMapper roleInformationMapper) {
+        this.roleInformationMapper = roleInformationMapper;
+    }
 
 
     @Override

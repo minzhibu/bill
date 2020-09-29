@@ -13,8 +13,11 @@ import java.util.UUID;
 @Service
 public class JurisdictionInformationServerImpl implements JurisdictionInformationServer {
 
-    @Autowired
-    private JurisdictionInformationMapper jurisdictionInformationMapper;
+    private final JurisdictionInformationMapper jurisdictionInformationMapper;
+
+    public JurisdictionInformationServerImpl(JurisdictionInformationMapper jurisdictionInformationMapper) {
+        this.jurisdictionInformationMapper = jurisdictionInformationMapper;
+    }
 
     @Override
     public List<JurisdictionInformationDTO> selectByTree() {
