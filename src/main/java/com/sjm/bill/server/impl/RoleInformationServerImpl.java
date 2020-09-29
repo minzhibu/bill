@@ -2,21 +2,28 @@ package com.sjm.bill.server.impl;
 
 import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
+import com.sjm.bill.dto.RoleInformationDTO;
 import com.sjm.bill.mbg.mapper.RoleInformationMapper;
+import com.sjm.bill.mbg.mapper.RoleJurisdictionFromMapper;
 import com.sjm.bill.mbg.model.RoleInformation;
+import com.sjm.bill.mbg.model.RoleJurisdictionFrom;
 import com.sjm.bill.server.RoleInformationServer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RoleInformationServerImpl implements RoleInformationServer {
     private final RoleInformationMapper roleInformationMapper;
+    private final RoleJurisdictionFromMapper roleJurisdictionFromMapper;
 
-    public RoleInformationServerImpl(RoleInformationMapper roleInformationMapper) {
+    public RoleInformationServerImpl(RoleInformationMapper roleInformationMapper, RoleJurisdictionFromMapper roleJurisdictionFromMapper) {
         this.roleInformationMapper = roleInformationMapper;
+        this.roleJurisdictionFromMapper = roleJurisdictionFromMapper;
     }
 
 
@@ -31,8 +38,28 @@ public class RoleInformationServerImpl implements RoleInformationServer {
     }
 
     @Override
-    public void insert(RoleInformation roleInformation) {
+    @Transactional
+    public void insert(RoleInformationDTO roleInformationDTO) {
+        RoleInformation roleInformation = new RoleInformation();
+        String roleId = UUID.randomUUID().getMostSignificantBits()+"";
+        roleInformation.setId(roleId);
+        roleInformation.setRoleName(roleInformationDTO.getRoleName());
+        roleInformation.setState(roleInformationDTO.getState());
+        roleInformation.setExt1("");
+        roleInformation.setDefaultRole(1);
+        roleInformation.setUpdateTime(new Date());
+        roleInformation.setCreateTime(new Date());
+        List<String> authoritys = roleInformationDTO.getAuthoritys();
+        List<RoleJurisdictionFrom> RoleJurisdictionFroms = new ArrayList<>();
+        for(String jurisdictions: authoritys){
+            RoleJurisdictionFrom roleJurisdictionFrom = new RoleJurisdictionFrom();
+            roleJurisdictionFrom.setId(UUID.randomUUID().getMostSignificantBits() + "");
+            roleJurisdictionFrom.setRoleId(Long.parseLong(roleId));
+            roleJurisdictionFrom.setJurisdictionId(Long.parseLong(jurisdictions));
+            RoleJurisdictionFroms.add(roleJurisdictionFrom);
+        }
         roleInformationMapper.insert(roleInformation);
+        roleJurisdictionFromMapper.insertBatch(RoleJurisdictionFroms);
     }
 
     @Override

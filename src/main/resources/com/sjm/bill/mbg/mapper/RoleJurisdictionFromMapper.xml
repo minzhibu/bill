@@ -148,4 +148,12 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <insert id="insertBatch">
+    INSERT INTO ROLE_JURISDICTION_FROM (id,role_id,jurisdiction_id)
+    VALUES
+    <foreach collection="roleJurisdictionFroms" item="RoleJurisdictionFrom" separator=",">
+      (#{RoleJurisdictionFrom.id},#{RoleJurisdictionFrom.roleId},#{RoleJurisdictionFrom.jurisdictionId})
+    </foreach>
+  </insert>
 </mapper>

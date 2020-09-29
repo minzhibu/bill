@@ -2,6 +2,7 @@ package com.sjm.bill.server;
 
 import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
+import com.sjm.bill.dto.RoleInformationDTO;
 import com.sjm.bill.mbg.model.RoleInformation;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface RoleInformationServer {
      * 添加一条记录
      * @param roleInformation
      */
-    void insert(RoleInformation roleInformation);
+    void insert(RoleInformationDTO roleInformationDTO);
 
     /**
      * 根据id修改一条数据

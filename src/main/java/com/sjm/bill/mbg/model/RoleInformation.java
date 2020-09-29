@@ -9,7 +9,7 @@ public class RoleInformation implements Serializable {
      *
      * @mbggenerated
      */
-    private Long id;
+    private String id;
 
     /**
      * 角色姓名
@@ -55,11 +55,11 @@ public class RoleInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

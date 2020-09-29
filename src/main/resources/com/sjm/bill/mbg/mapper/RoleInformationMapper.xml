@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sjm.bill.mbg.mapper.RoleInformationMapper">
   <resultMap id="BaseResultMap" type="com.sjm.bill.mbg.model.RoleInformation">
-    <id column="ID" jdbcType="BIGINT" property="id" />
+    <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
     <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
     <result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
@@ -105,10 +105,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ROLE_INFORMATION (ROLE_NAME, CREATE_TIME, UPDATE_TIME, 
+    insert into ROLE_INFORMATION (ID,ROLE_NAME, CREATE_TIME, UPDATE_TIME,
       STATE, DEFAULT_ROLE, EXT1
       )
-    values (#{roleName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
+    values (#{id,jdbcType=VARCHAR},#{roleName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE},
       #{state,jdbcType=INTEGER}, #{defaultRole,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}
       )
   </insert>
@@ -238,7 +238,7 @@
       STATE = #{state,jdbcType=INTEGER},
       DEFAULT_ROLE = #{defaultRole,jdbcType=INTEGER},
       EXT1 = #{ext1,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectPage" resultMap="BaseResultMap">
     SELECT

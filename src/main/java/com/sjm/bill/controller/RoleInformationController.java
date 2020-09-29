@@ -1,12 +1,14 @@
 package com.sjm.bill.controller;
 
 import com.sjm.bill.common.CommonResult;
-import com.sjm.bill.common.ResultCode;
+import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
+import com.sjm.bill.dto.RoleInformationDTO;
 import com.sjm.bill.mbg.model.RoleInformation;
 import com.sjm.bill.server.RoleInformationServer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/role")
@@ -18,15 +20,15 @@ public class RoleInformationController {
         this.roleInformationServer = roleInformationServer;
     }
 
-    @GetMapping("/")
-    public CommonResult selectAll(int page, int size){
+    @GetMapping("/{page}/{size}")
+    public CommonResult selectAll(@PathVariable int page, @PathVariable int size){
         PaginationDTO<RoleInformation> roleInformationPaginationDTO = roleInformationServer.selectPage(page, size);
         return CommonResult.success(roleInformationPaginationDTO);
     }
 
     @PostMapping("/")
-    public CommonResult insert(RoleInformation roleInformation){
-        roleInformationServer.insert(roleInformation);
+    public CommonResult insert(@RequestBody RoleInformationDTO roleInformationDTO){
+        roleInformationServer.insert(roleInformationDTO);
         return CommonResult.success(null);
     }
 
@@ -42,4 +44,9 @@ public class RoleInformationController {
         return CommonResult.success(null);
     }
 
+    @GetMapping("/selectByIdToJurisdiction/{id}")
+    public CommonResult selectByIdToJurisdiction(@PathVariable Long id){
+        List<JurisdictionInformationDTO> jurisdictionInformationDTOS = roleInformationServer.selectByIdToJurisdiction(id);
+        return CommonResult.success(jurisdictionInformationDTOS);
+    }
 }
