@@ -49,28 +49,26 @@ public class RoleInformationServerImpl implements RoleInformationServer {
         roleInformation.setDefaultRole(1);
         roleInformation.setUpdateTime(new Date());
         roleInformation.setCreateTime(new Date());
-        List<String> authoritys = roleInformationDTO.getAuthoritys();
-        List<RoleJurisdictionFrom> RoleJurisdictionFroms = new ArrayList<>();
-        for(String jurisdictions: authoritys){
-            RoleJurisdictionFrom roleJurisdictionFrom = new RoleJurisdictionFrom();
-            roleJurisdictionFrom.setId(UUID.randomUUID().getMostSignificantBits() + "");
-            roleJurisdictionFrom.setRoleId(Long.parseLong(roleId));
-            roleJurisdictionFrom.setJurisdictionId(Long.parseLong(jurisdictions));
-            RoleJurisdictionFroms.add(roleJurisdictionFrom);
-        }
+        List<String> authorityS = roleInformationDTO.getAuthoritys();
+        List<RoleJurisdictionFrom> roleJurisdictionFroms = createRoleJurisdictionFromList(authorityS,roleId);
         roleInformationMapper.insert(roleInformation);
-        roleJurisdictionFromMapper.insertBatch(RoleJurisdictionFroms);
+        roleJurisdictionFromMapper.insertBatch(roleJurisdictionFroms);
     }
 
     @Override
-    public void update(Long id, RoleInformation roleInformation) {
+    @Transactional
+    public void update(Long id, RoleInformationDTO roleInformationDTO) {
         RoleInformation roleInformation1 = roleInformationMapper.selectByPrimaryKey(id);
         roleInformation1.setUpdateTime(new Date());
-        roleInformation1.setDefaultRole(roleInformation.getDefaultRole());
-        roleInformation1.setExt1(roleInformation.getExt1());
-        roleInformation1.setRoleName(roleInformation.getRoleName());
-        roleInformation1.setState(roleInformation.getState());
+        roleInformation1.setDefaultRole(roleInformationDTO.getDefaultRole());
+        roleInformation1.setExt1(roleInformationDTO.getExt1());
+        roleInformation1.setRoleName(roleInformationDTO.getRoleName());
+        roleInformation1.setState(roleInformationDTO.getState());
+        roleJurisdictionFromMapper.deleteByRoleId(id+"");
+        List<String> authorityS = roleInformationDTO.getAuthoritys();
+        List<RoleJurisdictionFrom> roleJurisdictionFroms = createRoleJurisdictionFromList(authorityS,roleInformationDTO.getId());
         roleInformationMapper.updateByPrimaryKey(roleInformation1);
+        roleJurisdictionFromMapper.insertBatch(roleJurisdictionFroms);
     }
 
     @Override
@@ -81,5 +79,17 @@ public class RoleInformationServerImpl implements RoleInformationServer {
     @Override
     public List<JurisdictionInformationDTO> selectByIdToJurisdiction(Long id) {
         return roleInformationMapper.selectByIdToJurisdiction(id);
+    }
+
+    private List<RoleJurisdictionFrom> createRoleJurisdictionFromList(List<String> authoritys,String roleId){
+        List<RoleJurisdictionFrom> RoleJurisdictionFroms = new ArrayList<>();
+        for(String jurisdictions: authoritys){
+            RoleJurisdictionFrom roleJurisdictionFrom = new RoleJurisdictionFrom();
+            roleJurisdictionFrom.setId(UUID.randomUUID().getMostSignificantBits() + "");
+            roleJurisdictionFrom.setRoleId(Long.parseLong(roleId));
+            roleJurisdictionFrom.setJurisdictionId(Long.parseLong(jurisdictions));
+            RoleJurisdictionFroms.add(roleJurisdictionFrom);
+        }
+        return RoleJurisdictionFroms;
     }
 }

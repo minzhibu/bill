@@ -53,4 +53,8 @@ class BillApplicationTests {
         int i = roleJurisdictionFromMapper.insertBatch(list);
         System.out.println(i);
     }
+    @Test
+    void delete(){
+        roleJurisdictionFromMapper.deleteByRoleId(1+"");
+    }
 }

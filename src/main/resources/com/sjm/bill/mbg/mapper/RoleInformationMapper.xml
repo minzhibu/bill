@@ -102,14 +102,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sjm.bill.mbg.model.RoleInformation">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into ROLE_INFORMATION (ID,ROLE_NAME, CREATE_TIME, UPDATE_TIME,
       STATE, DEFAULT_ROLE, EXT1
       )
-    values (#{id,jdbcType=VARCHAR},#{roleName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE},
-      #{state,jdbcType=INTEGER}, #{defaultRole,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}
+    values (#{id},#{roleName}, #{createTime}, #{updateTime},
+      #{state}, #{defaultRole}, #{ext1}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sjm.bill.mbg.model.RoleInformation">
@@ -245,6 +242,8 @@
         ID,ROLE_NAME,CREATE_TIME,UPDATE_TIME,STATE,DEFAULT_ROLE,EXT1
     FROM
         ROLE_INFORMATION
+    ORDER BY
+        CREATE_TIME
     LIMIT #{page},#{size};
   </select>
 

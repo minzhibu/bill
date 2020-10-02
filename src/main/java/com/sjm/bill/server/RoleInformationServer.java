@@ -27,7 +27,7 @@ public interface RoleInformationServer {
      * @param id 这条数据的id
      * @param roleInformation 实体类对象
      */
-    void update(Long id,RoleInformation roleInformation);
+    void update(Long id,RoleInformationDTO roleInformationDTO);
 
     /**
      * 根据id删除一条数据

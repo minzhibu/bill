@@ -22,4 +22,6 @@ public interface RoleJurisdictionFromMapper {
     int updateByExample(@Param("record") RoleJurisdictionFrom record, @Param("example") RoleJurisdictionFromExample example);
 
     int insertBatch(@Param("roleJurisdictionFroms") List<RoleJurisdictionFrom> roleJurisdictionFroms);
+
+    int deleteByRoleId(@Param("roleId") String roleId);
 }

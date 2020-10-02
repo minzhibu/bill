@@ -33,8 +33,8 @@ public class RoleInformationController {
     }
 
     @PutMapping("/{id}")
-    public CommonResult update(@PathVariable Long id, RoleInformation roleInformation){
-        roleInformationServer.update(id,roleInformation);
+    public CommonResult update(@PathVariable Long id,@RequestBody RoleInformationDTO roleInformationDTO){
+        roleInformationServer.update(id,roleInformationDTO);
         return CommonResult.success(null);
     }
 

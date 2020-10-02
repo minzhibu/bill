@@ -156,4 +156,9 @@
       (#{RoleJurisdictionFrom.id},#{RoleJurisdictionFrom.roleId},#{RoleJurisdictionFrom.jurisdictionId})
     </foreach>
   </insert>
+
+  <delete id="deleteByRoleId">
+    delete from ROLE_JURISDICTION_FROM
+    WHERE role_id = #{roleId}
+  </delete>
 </mapper>
