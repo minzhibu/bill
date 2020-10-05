@@ -29,7 +29,7 @@ public class RoleInformationServerImpl implements RoleInformationServer {
 
     @Override
     public PaginationDTO<RoleInformation> selectPage(int page, int size) {
-        List<RoleInformation> roleInformations = roleInformationMapper.selectPage((page - 1), size);
+        List<RoleInformation> roleInformations = roleInformationMapper.selectPage((page - 1) * size, size);
         Integer count = roleInformationMapper.count();
         PaginationDTO<RoleInformation> paginationDTO = new PaginationDTO<>();
         paginationDTO.setPagination(count,page,size);
