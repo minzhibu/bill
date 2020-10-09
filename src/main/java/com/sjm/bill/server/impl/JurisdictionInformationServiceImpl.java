@@ -3,19 +3,18 @@ package com.sjm.bill.server.impl;
 import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.mbg.mapper.JurisdictionInformationMapper;
 import com.sjm.bill.mbg.model.JurisdictionInformation;
-import com.sjm.bill.server.JurisdictionInformationServer;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sjm.bill.server.JurisdictionInformationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class JurisdictionInformationServerImpl implements JurisdictionInformationServer {
+public class JurisdictionInformationServiceImpl implements JurisdictionInformationService {
 
     private final JurisdictionInformationMapper jurisdictionInformationMapper;
 
-    public JurisdictionInformationServerImpl(JurisdictionInformationMapper jurisdictionInformationMapper) {
+    public JurisdictionInformationServiceImpl(JurisdictionInformationMapper jurisdictionInformationMapper) {
         this.jurisdictionInformationMapper = jurisdictionInformationMapper;
     }
 

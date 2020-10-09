@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sjm.bill.mbg.mapper.UserInformationMapper">
   <resultMap id="BaseResultMap" type="com.sjm.bill.mbg.model.UserInformation">
-    <id column="ID" jdbcType="BIGINT" property="id" />
+    <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
     <result column="ACCOUNT_NUMBER" jdbcType="VARCHAR" property="accountNumber" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
-    <result column="IMG_ADDRESS" jdbcType="BIGINT" property="imgAddress" />
+    <result column="IMG_ADDRESS" jdbcType="VARCHAR" property="imgAddress" />
     <result column="STATE" jdbcType="BIGINT" property="state" />
     <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
     <result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
@@ -106,15 +106,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sjm.bill.mbg.model.UserInformation">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into USER_INFORMATION (USER_NAME, ACCOUNT_NUMBER, PASSWORD, 
+    insert into USER_INFORMATION (ID,USER_NAME, ACCOUNT_NUMBER, PASSWORD,
       IMG_ADDRESS, STATE, CREATE_TIME, 
       UPDATE_TIME, DEFAULT_USER, EXT1
       )
-    values (#{userName,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{imgAddress,jdbcType=BIGINT}, #{state,jdbcType=BIGINT}, #{createTime,jdbcType=DATE}, 
+    values (#{id}#{userName,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{imgAddress,jdbcType=VARCHAR}, #{state,jdbcType=BIGINT}, #{createTime,jdbcType=DATE},
       #{updateTime,jdbcType=DATE}, #{defaultUser,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}
       )
   </insert>
@@ -288,4 +285,22 @@
       EXT1 = #{ext1,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+
+<!--  分页查询-->
+  <select id="selectPage" resultMap="BaseResultMap">
+    SELECT
+        ID,USER_NAME,ACCOUNT_NUMBER,PASSWORD,IMG_ADDRESS,STATE,CREATE_TIME,UPDATE_TIME,DEFAULT_USER,EXT1
+    FROM
+        USER_INFORMATION
+    ORDER BY
+        CREATE_TIME
+    LIMIT #{page},#{size};
+  </select>
+
+  <select id="count" resultType="java.lang.Integer">
+    SELECT
+        count(1)
+    FROM
+        USER_INFORMATION
+  </select>
 </mapper>

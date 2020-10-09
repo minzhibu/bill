@@ -2,17 +2,17 @@ package com.sjm.bill.controller;
 
 import com.sjm.bill.common.CommonResult;
 import com.sjm.bill.mbg.model.JurisdictionInformation;
-import com.sjm.bill.server.JurisdictionInformationServer;
+import com.sjm.bill.server.JurisdictionInformationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/jurisdictionInformation")
 public class JurisdictionInformationController {
 
-    private final JurisdictionInformationServer jurisdictionInformationServer;
+    private final JurisdictionInformationService jurisdictionInformationService;
 
-    public JurisdictionInformationController(JurisdictionInformationServer jurisdictionInformationServer) {
-        this.jurisdictionInformationServer = jurisdictionInformationServer;
+    public JurisdictionInformationController(JurisdictionInformationService jurisdictionInformationService) {
+        this.jurisdictionInformationService = jurisdictionInformationService;
     }
 
     /**
@@ -21,7 +21,7 @@ public class JurisdictionInformationController {
      */
     @GetMapping("/")
     public CommonResult selectByTree(){
-        return CommonResult.success(jurisdictionInformationServer.selectByTree());
+        return CommonResult.success(jurisdictionInformationService.selectByTree());
     }
 
     /**
@@ -30,7 +30,7 @@ public class JurisdictionInformationController {
      */
     @PostMapping("/")
     public CommonResult postJurisdictionInformation(@RequestBody JurisdictionInformation jurisdictionInformation){
-        jurisdictionInformationServer.insert(jurisdictionInformation);
+        jurisdictionInformationService.insert(jurisdictionInformation);
         return CommonResult.success(null);
     }
 
@@ -42,7 +42,7 @@ public class JurisdictionInformationController {
      */
     @PutMapping("/{id}")
     public CommonResult putJurisdictionInformation(@PathVariable Long id, @RequestBody JurisdictionInformation jurisdictionInformation){
-        jurisdictionInformationServer.update(id,jurisdictionInformation);
+        jurisdictionInformationService.update(id,jurisdictionInformation);
         return CommonResult.success(null);
     }
 
@@ -53,7 +53,7 @@ public class JurisdictionInformationController {
      */
     @DeleteMapping("/{id}")
     public CommonResult deleteJurisdictionInformation(@PathVariable Long id){
-        boolean delete = jurisdictionInformationServer.delete(id);
+        boolean delete = jurisdictionInformationService.delete(id);
         CommonResult commonResult;
         if(delete){
             commonResult = CommonResult.success(null);

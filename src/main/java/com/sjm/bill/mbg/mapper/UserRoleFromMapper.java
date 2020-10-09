@@ -2,8 +2,9 @@ package com.sjm.bill.mbg.mapper;
 
 import com.sjm.bill.mbg.model.UserRoleFrom;
 import com.sjm.bill.mbg.model.UserRoleFromExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserRoleFromMapper {
     int countByExample(UserRoleFromExample example);
@@ -19,4 +20,8 @@ public interface UserRoleFromMapper {
     int updateByExampleSelective(@Param("record") UserRoleFrom record, @Param("example") UserRoleFromExample example);
 
     int updateByExample(@Param("record") UserRoleFrom record, @Param("example") UserRoleFromExample example);
+
+    int insertBatch(@Param("userRoleFroms") List<UserRoleFrom> userRoleFroms);
+
+    int deleteByUserId(@Param("userId") String userId);
 }

@@ -2,8 +2,9 @@ package com.sjm.bill.mbg.mapper;
 
 import com.sjm.bill.mbg.model.UserInformation;
 import com.sjm.bill.mbg.model.UserInformationExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserInformationMapper {
     int countByExample(UserInformationExample example);
@@ -27,4 +28,18 @@ public interface UserInformationMapper {
     int updateByPrimaryKeySelective(UserInformation record);
 
     int updateByPrimaryKey(UserInformation record);
+
+    /**
+     * 分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    List<UserInformation> selectPage(@Param("page")int page, @Param("size") int size);
+
+    /**
+     * 总记录条数
+     * @return
+     */
+    Integer count();
 }

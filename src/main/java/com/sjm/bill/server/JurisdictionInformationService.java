@@ -5,7 +5,7 @@ import com.sjm.bill.mbg.model.JurisdictionInformation;
 
 import java.util.List;
 
-public interface JurisdictionInformationServer {
+public interface JurisdictionInformationService {
 
     /**
      * 查询该表的树形结构

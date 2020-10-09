@@ -7,7 +7,7 @@ import com.sjm.bill.mbg.mapper.RoleInformationMapper;
 import com.sjm.bill.mbg.mapper.RoleJurisdictionFromMapper;
 import com.sjm.bill.mbg.model.RoleInformation;
 import com.sjm.bill.mbg.model.RoleJurisdictionFrom;
-import com.sjm.bill.server.RoleInformationServer;
+import com.sjm.bill.server.RoleInformationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class RoleInformationServerImpl implements RoleInformationServer {
+public class RoleInformationServiceImpl implements RoleInformationService {
     private final RoleInformationMapper roleInformationMapper;
     private final RoleJurisdictionFromMapper roleJurisdictionFromMapper;
 
-    public RoleInformationServerImpl(RoleInformationMapper roleInformationMapper, RoleJurisdictionFromMapper roleJurisdictionFromMapper) {
+    public RoleInformationServiceImpl(RoleInformationMapper roleInformationMapper, RoleJurisdictionFromMapper roleJurisdictionFromMapper) {
         this.roleInformationMapper = roleInformationMapper;
         this.roleJurisdictionFromMapper = roleJurisdictionFromMapper;
     }
@@ -74,6 +74,7 @@ public class RoleInformationServerImpl implements RoleInformationServer {
     @Override
     public void delete(Long id) {
         roleInformationMapper.deleteByPrimaryKey(id);
+        roleJurisdictionFromMapper.deleteByRoleId(id+"");
     }
 
     @Override

@@ -148,4 +148,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <insert id="insertBatch">
+    INSERT INTO USER_ROLE_FROM (id,user_id,role_id)
+    VALUES
+    <foreach collection="userRoleFroms" item="userRoleFrom" separator=",">
+      (#{RoleJurisdictionFrom.id},#{RoleJurisdictionFrom.userId},#{RoleJurisdictionFrom.roleId})
+    </foreach>
+  </insert>
+
+  <delete id="deleteByUserId">
+    delete from USER_ROLE_FROM
+    WHERE user_id = #{userId}
+  </delete>
 </mapper>

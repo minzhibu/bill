@@ -7,7 +7,7 @@ import com.sjm.bill.mbg.model.RoleInformation;
 
 import java.util.List;
 
-public interface RoleInformationServer {
+public interface RoleInformationService {
     /**
      * 分页查询
      * @param page 页数

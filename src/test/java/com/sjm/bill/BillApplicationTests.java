@@ -4,9 +4,11 @@ import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.mbg.mapper.JurisdictionInformationMapper;
 import com.sjm.bill.mbg.mapper.RoleJurisdictionFromMapper;
+import com.sjm.bill.mbg.mapper.UserInformationMapper;
 import com.sjm.bill.mbg.model.RoleInformation;
 import com.sjm.bill.mbg.model.RoleJurisdictionFrom;
-import com.sjm.bill.server.RoleInformationServer;
+import com.sjm.bill.mbg.model.UserInformation;
+import com.sjm.bill.server.RoleInformationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,9 +22,12 @@ class BillApplicationTests {
     @Autowired
     private JurisdictionInformationMapper jurisdictionInformationMapper;
     @Autowired
-    private RoleInformationServer roleInformationServer;
+    private RoleInformationService roleInformationService;
     @Autowired
     RoleJurisdictionFromMapper roleJurisdictionFromMapper;
+
+    @Autowired
+    UserInformationMapper userInformationMapper;
     @Test
     void contextLoads() {
     }
@@ -30,8 +35,8 @@ class BillApplicationTests {
 
     @Test
     void TestRoleSelectPage(){
-        PaginationDTO<RoleInformation> paginationDTO = roleInformationServer.selectPage(1, 1);
-        List<JurisdictionInformationDTO> jurisdictionInformationDTOS = roleInformationServer.selectByIdToJurisdiction(1L);
+        PaginationDTO<RoleInformation> paginationDTO = roleInformationService.selectPage(1, 1);
+        List<JurisdictionInformationDTO> jurisdictionInformationDTOS = roleInformationService.selectByIdToJurisdiction(1L);
         System.out.println(paginationDTO.isShowNext());
         System.out.println(paginationDTO.getTotalPage());
 
@@ -56,5 +61,17 @@ class BillApplicationTests {
     @Test
     void delete(){
         roleJurisdictionFromMapper.deleteByRoleId(1+"");
+    }
+
+    @Test
+    void userSelectPage(){
+        List<UserInformation> userInformations = userInformationMapper.selectPage(1, 2);
+        System.out.println(userInformations);
+    }
+
+    @Test
+    void userCount(){
+        Integer count = userInformationMapper.count();
+        System.out.println(count);
     }
 }
