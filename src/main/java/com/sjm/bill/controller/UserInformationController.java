@@ -5,6 +5,7 @@ import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.dto.UserInformationDTO;
 import com.sjm.bill.mbg.model.UserInformation;
 import com.sjm.bill.server.UserInformationService;
+import com.sjm.bill.server.impl.FileServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +25,7 @@ public class UserInformationController {
     }
 
     @PostMapping("/")
-    public CommonResult insert(@RequestBody UserInformationDTO userInformationDTO){
+    public CommonResult insert( @RequestBody UserInformationDTO userInformationDTO){
         userInformationService.insert(userInformationDTO);
         return CommonResult.success(null);
     }
