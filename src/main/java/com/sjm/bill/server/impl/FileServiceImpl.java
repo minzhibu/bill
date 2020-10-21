@@ -16,7 +16,11 @@ public class FileServiceImpl implements FileService {
     @Override
     public String upLoadImage(MultipartFile multipartFile) {
         String originalFilename = multipartFile.getOriginalFilename();
-        String fileName = UUID.randomUUID().getMostSignificantBits()+ "_" + originalFilename;
+        String imageType = null;
+        if(originalFilename != null){
+            imageType = originalFilename.substring(originalFilename.lastIndexOf("."));
+        }
+        String fileName = UUID.randomUUID().getMostSignificantBits()+ imageType;
         File file = new File("F:\\images\\" + fileName);
         try {
             multipartFile.transferTo(file);
