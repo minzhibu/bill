@@ -20,6 +20,10 @@ public class FileServiceImpl implements FileService {
         if(originalFilename != null){
             imageType = originalFilename.substring(originalFilename.lastIndexOf("."));
         }
+        File parentFile = new File("F:\\images\\");
+        if(!parentFile.exists()){
+            parentFile.mkdirs();
+        }
         String fileName = UUID.randomUUID().getMostSignificantBits()+ imageType;
         File file = new File("F:\\images\\" + fileName);
         try {
