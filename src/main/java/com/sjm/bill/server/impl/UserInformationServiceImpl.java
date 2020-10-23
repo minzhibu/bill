@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -80,6 +81,10 @@ public class UserInformationServiceImpl implements UserInformationService {
         userInformation.setState(userInformationDTO.getState());
         userInformation.setUpdateTime(userInformationDTO.getCreateTime());
         userInformation.setUserName(userInformationDTO.getUserName());
+        userInformation.setCreateTime(new Date());
+        userInformation.setUpdateTime(new Date());
+        userInformation.setDefaultUser(1);
+        userInformation.setExt1("");
     }
 
     private List<UserRoleFrom> createUserRoleFrom(List<String> roleIdS,Long userId){

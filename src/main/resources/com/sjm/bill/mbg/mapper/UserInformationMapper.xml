@@ -110,7 +110,7 @@
       IMG_ADDRESS, STATE, CREATE_TIME, 
       UPDATE_TIME, DEFAULT_USER, EXT1
       )
-    values (#{id}#{userName,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    values (#{id},#{userName,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{imgAddress,jdbcType=VARCHAR}, #{state,jdbcType=BIGINT}, #{createTime,jdbcType=DATE},
       #{updateTime,jdbcType=DATE}, #{defaultUser,jdbcType=INTEGER}, #{ext1,jdbcType=VARCHAR}
       )

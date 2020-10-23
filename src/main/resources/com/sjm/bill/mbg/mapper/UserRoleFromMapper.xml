@@ -153,7 +153,7 @@
     INSERT INTO USER_ROLE_FROM (id,user_id,role_id)
     VALUES
     <foreach collection="userRoleFroms" item="userRoleFrom" separator=",">
-      (#{RoleJurisdictionFrom.id},#{RoleJurisdictionFrom.userId},#{RoleJurisdictionFrom.roleId})
+      (#{userRoleFrom.id},#{userRoleFrom.userId},#{userRoleFrom.roleId})
     </foreach>
   </insert>
 
