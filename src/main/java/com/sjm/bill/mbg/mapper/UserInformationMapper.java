@@ -2,6 +2,7 @@ package com.sjm.bill.mbg.mapper;
 
 import com.sjm.bill.mbg.model.UserInformation;
 import com.sjm.bill.mbg.model.UserInformationExample;
+import com.sjm.bill.mbg.model.UserRoleFrom;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -42,4 +43,11 @@ public interface UserInformationMapper {
      * @return
      */
     Integer count();
+
+    /**
+     * 根据用户id查询角色
+     * @param id
+     * @return
+     */
+    List<UserRoleFrom> selectByIdToRole(@Param("id") Long id);
 }

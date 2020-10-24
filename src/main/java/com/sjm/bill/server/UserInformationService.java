@@ -3,7 +3,10 @@ package com.sjm.bill.server;
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.dto.UserInformationDTO;
 import com.sjm.bill.mbg.model.UserInformation;
+import com.sjm.bill.mbg.model.UserRoleFrom;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 public interface UserInformationService {
@@ -33,4 +36,6 @@ public interface UserInformationService {
      * @param id 这条数据的id
      */
     void delete(Long id);
+
+    List<UserRoleFrom> selectByIdToRole(Long id);
 }

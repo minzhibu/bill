@@ -66,6 +66,11 @@ public class UserInformationServiceImpl implements UserInformationService {
         userRoleFromMapper.deleteByUserId(id + "");
     }
 
+    @Override
+    public List<UserRoleFrom> selectByIdToRole(Long id) {
+        return null;
+    }
+
     /**
      * 通过DTO对象构造原始对象
      * @param userInformation

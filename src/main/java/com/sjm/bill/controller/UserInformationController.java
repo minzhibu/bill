@@ -42,4 +42,10 @@ public class UserInformationController {
         return CommonResult.success(null);
     }
 
+    @GetMapping("/selectByIdToRole/{id}")
+    public CommonResult selectByIdToRole(@PathVariable Long id){
+
+        return CommonResult.success(null);
+    }
+
 }

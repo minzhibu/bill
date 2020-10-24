@@ -303,4 +303,17 @@
     FROM
         USER_INFORMATION
   </select>
+  <resultMap id="userRoleMap" type="com.sjm.bill.mbg.model.UserRoleFrom">
+    <result column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="ROLE_ID" jdbcType="BIGINT" property="roleId" />
+  </resultMap>
+  <select id="selectByIdToRole" resultMap="userRoleMap">
+    SELECT
+        ID, USER_ID, ROLE_ID
+    FROM
+        USER_ROLE_FROM
+    WHERE
+        USER_ID = #{id}
+  </select>
 </mapper>
