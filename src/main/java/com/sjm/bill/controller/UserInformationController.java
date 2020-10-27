@@ -49,7 +49,7 @@ public class UserInformationController {
      */
     @GetMapping("/selectByIdToRole/{id}")
     public CommonResult selectByIdToRole(@PathVariable Long id){
-        return CommonResult.success( userInformationService.selectByIdToRole(id));
+        return CommonResult.success(userInformationService.selectByIdToRole(id));
     }
 
 }
