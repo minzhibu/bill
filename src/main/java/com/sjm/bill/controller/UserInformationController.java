@@ -42,10 +42,14 @@ public class UserInformationController {
         return CommonResult.success(null);
     }
 
+    /**
+     * 根据用户id查询用户对应的角色
+     * @param id 用户id
+     * @return
+     */
     @GetMapping("/selectByIdToRole/{id}")
     public CommonResult selectByIdToRole(@PathVariable Long id){
-
-        return CommonResult.success(null);
+        return CommonResult.success( userInformationService.selectByIdToRole(id));
     }
 
 }

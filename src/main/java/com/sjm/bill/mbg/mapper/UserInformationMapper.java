@@ -1,5 +1,6 @@
 package com.sjm.bill.mbg.mapper;
 
+import com.sjm.bill.dto.UserRoleFromDTO;
 import com.sjm.bill.mbg.model.UserInformation;
 import com.sjm.bill.mbg.model.UserInformationExample;
 import com.sjm.bill.mbg.model.UserRoleFrom;
@@ -49,5 +50,5 @@ public interface UserInformationMapper {
      * @param id
      * @return
      */
-    List<UserRoleFrom> selectByIdToRole(@Param("id") Long id);
+    List<UserRoleFromDTO> selectByIdToRole(@Param("id") Long id);
 }

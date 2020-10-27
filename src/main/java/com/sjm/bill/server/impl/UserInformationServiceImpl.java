@@ -2,6 +2,7 @@ package com.sjm.bill.server.impl;
 
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.dto.UserInformationDTO;
+import com.sjm.bill.dto.UserRoleFromDTO;
 import com.sjm.bill.mbg.mapper.UserInformationMapper;
 import com.sjm.bill.mbg.mapper.UserRoleFromMapper;
 import com.sjm.bill.mbg.model.UserInformation;
@@ -67,8 +68,8 @@ public class UserInformationServiceImpl implements UserInformationService {
     }
 
     @Override
-    public List<UserRoleFrom> selectByIdToRole(Long id) {
-        return null;
+    public List<UserRoleFromDTO> selectByIdToRole(Long id) {
+        return userInformationMapper.selectByIdToRole(id);
     }
 
     /**
@@ -97,8 +98,8 @@ public class UserInformationServiceImpl implements UserInformationService {
         for(String roleId: roleIdS){
             UserRoleFrom userRoleFrom = new UserRoleFrom();
             userRoleFrom.setId(UUID.randomUUID().getMostSignificantBits());
-            userRoleFrom.setUserId(userId);
-            userRoleFrom.setRoleId(Long.parseLong(roleId));
+            userRoleFrom.setUserId(userId + "");
+            userRoleFrom.setRoleId(Long.parseLong(roleId) + "");
             userRoleFroms.add(userRoleFrom);
         }
         return userRoleFroms;

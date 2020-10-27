@@ -293,7 +293,7 @@
     FROM
         USER_INFORMATION
     ORDER BY
-        CREATE_TIME
+        CREATE_TIME DESC,ID DESC
     LIMIT #{page},#{size};
   </select>
 
@@ -303,16 +303,28 @@
     FROM
         USER_INFORMATION
   </select>
-  <resultMap id="userRoleMap" type="com.sjm.bill.mbg.model.UserRoleFrom">
+  <resultMap id="userRoleMap" type="com.sjm.bill.dto.UserRoleFromDTO">
     <result column="ID" jdbcType="BIGINT" property="id" />
     <result column="USER_ID" jdbcType="BIGINT" property="userId" />
     <result column="ROLE_ID" jdbcType="BIGINT" property="roleId" />
+    <association property="roleInformation" javaType="com.sjm.bill.mbg.model.RoleInformation">
+      <id column="ID" jdbcType="VARCHAR" property="id" />
+      <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+      <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+      <result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+      <result column="STATE" jdbcType="INTEGER" property="state" />
+      <result column="DEFAULT_ROLE" jdbcType="INTEGER" property="defaultRole" />
+      <result column="EXT1" jdbcType="VARCHAR" property="ext1" />
+    </association>
   </resultMap>
   <select id="selectByIdToRole" resultMap="userRoleMap">
     SELECT
-        ID, USER_ID, ROLE_ID
+        USER_ID,
+        ROLE_ID,
+        ROLE_NAME
     FROM
-        USER_ROLE_FROM
+        USER_ROLE_FROM u
+        LEFT JOIN ROLE_INFORMATION r ON u.ROLE_ID = r.ID
     WHERE
         USER_ID = #{id}
   </select>

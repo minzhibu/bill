@@ -2,6 +2,7 @@ package com.sjm.bill.server;
 
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.dto.UserInformationDTO;
+import com.sjm.bill.dto.UserRoleFromDTO;
 import com.sjm.bill.mbg.model.UserInformation;
 import com.sjm.bill.mbg.model.UserRoleFrom;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,5 @@ public interface UserInformationService {
      */
     void delete(Long id);
 
-    List<UserRoleFrom> selectByIdToRole(Long id);
+    List<UserRoleFromDTO> selectByIdToRole(Long id);
 }
