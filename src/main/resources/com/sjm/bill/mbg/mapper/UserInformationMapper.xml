@@ -328,4 +328,12 @@
     WHERE
         USER_ID = #{id}
   </select>
+  <select id="selectByLogin" resultMap="BaseResultMap">
+    SELECT
+        ID,USER_NAME,ACCOUNT_NUMBER,PASSWORD,IMG_ADDRESS,STATE,CREATE_TIME,UPDATE_TIME,DEFAULT_USER,EXT1
+    FROM
+        USER_INFORMATION
+    WHERE
+        ACCOUNT_NUMBER = #{accountNumber} AND PASSWORD = #{password}
+  </select>
 </mapper>

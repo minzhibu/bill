@@ -51,4 +51,12 @@ public interface UserInformationMapper {
      * @return
      */
     List<UserRoleFromDTO> selectByIdToRole(@Param("id") Long id);
+
+    /**
+     *
+     * @param accountNumber 账号
+     * @param password 密码
+     * @return
+     */
+    List<UserInformation> selectByLogin(@Param("accountNumber") String accountNumber,@Param("password") String password);
 }

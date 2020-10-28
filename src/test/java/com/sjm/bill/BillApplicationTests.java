@@ -12,6 +12,7 @@ import com.sjm.bill.server.RoleInformationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,15 @@ class BillApplicationTests {
     private RoleInformationService roleInformationService;
     @Autowired
     RoleJurisdictionFromMapper roleJurisdictionFromMapper;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+
+    @Test
+    public void test(){
+        stringRedisTemplate.opsForValue().set("111","sss");
+    }
 
     @Autowired
     UserInformationMapper userInformationMapper;
