@@ -1,5 +1,6 @@
 package com.sjm.bill.server.impl;
 
+import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.dto.UserInformationDTO;
 import com.sjm.bill.dto.UserRoleFromDTO;
@@ -70,6 +71,11 @@ public class UserInformationServiceImpl implements UserInformationService {
     @Override
     public List<UserRoleFromDTO> selectByIdToRole(Long id) {
         return userInformationMapper.selectByIdToRole(id);
+    }
+
+    @Override
+    public List<JurisdictionInformationDTO> selectUserIdToAuthority(Long id) {
+        return userInformationMapper.selectUserIdToAuthority(id);
     }
 
     /**

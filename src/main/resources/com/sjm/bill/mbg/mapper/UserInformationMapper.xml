@@ -336,4 +336,60 @@
     WHERE
         ACCOUNT_NUMBER = #{accountNumber} AND PASSWORD = #{password}
   </select>
+
+  <!--查询树形-->
+  <resultMap id="TreeResultMap" type="com.sjm.bill.dto.JurisdictionInformationDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="jurisdiction_name" jdbcType="VARCHAR" property="jurisdictionName" />
+    <result column="parent_node_id" jdbcType="BIGINT" property="parentNodeId" />
+    <result column="is_modify" jdbcType="INTEGER" property="isModify" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="label_name" jdbcType="VARCHAR" property="labelName" />
+    <result column="is_show" jdbcType="BIT" property="isShow" />
+    <result column="priority" jdbcType="BIGINT" property="priority" />
+    <collection ofType="com.sjm.bill.mbg.model.JurisdictionInformation" property="childs">
+      <id column="cid" jdbcType="BIGINT" property="id" />
+      <result column="cjurisdiction_name" jdbcType="VARCHAR" property="jurisdictionName" />
+      <result column="cparent_node_id" jdbcType="BIGINT" property="parentNodeId" />
+      <result column="cis_modify" jdbcType="INTEGER" property="isModify" />
+      <result column="clink" jdbcType="VARCHAR" property="link" />
+      <result column="clabel_name" jdbcType="VARCHAR" property="labelName" />
+      <result column="cis_show" jdbcType="BIT" property="isShow" />
+      <result column="cpriority" jdbcType="BIGINT" property="priority" />
+    </collection>
+  </resultMap>
+  <select id="selectUserIdToAuthority" parameterType="java.lang.Long" resultMap="TreeResultMap">
+    SELECT
+        p.ID AS id,
+        p.JURISDICTION_NAME AS jurisdiction_name,
+        p.PARENT_NODE_ID AS parent_node_id,
+        p.IS_MODIFY AS is_modify,
+        p.LINK AS link,
+        p.LABEL_NAME AS label_name,
+        p.IS_SHOW AS is_show,
+        p.PRIORITY AS priority,
+        c.ID AS cid,
+        c.JURISDICTION_NAME AS cjurisdiction_name,
+        c.PARENT_NODE_ID AS cparent_node_id,
+        c.IS_MODIFY AS cis_modify,
+        c.LINK AS clink,
+        c.LABEL_NAME AS clabel_name,
+        c.IS_SHOW AS cis_show,
+        c.PRIORITY AS cpriority
+    FROM
+        USER_INFORMATION u
+        LEFT JOIN USER_ROLE_FROM s ON u.id = s.USER_ID
+        LEFT JOIN ROLE_INFORMATION r ON s.ROLE_ID = r.ID
+        LEFT JOIN ROLE_JURISDICTION_FROM f ON r.ID = f.ROLE_ID
+        LEFT JOIN JURISDICTION_INFORMATION p ON p.ID = f.JURISDICTION_ID
+        LEFT JOIN JURISDICTION_INFORMATION c ON p.ID = c.PARENT_NODE_ID
+    WHERE
+        p.PARENT_NODE_ID = - 1
+        AND u.ID = #{id}
+    GROUP BY
+        p.ID,c.ID
+    ORDER BY
+        priority ASC,
+        cpriority ASC
+  </select>
 </mapper>

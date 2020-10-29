@@ -1,5 +1,6 @@
 package com.sjm.bill.server;
 
+import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.PaginationDTO;
 import com.sjm.bill.dto.UserInformationDTO;
 import com.sjm.bill.dto.UserRoleFromDTO;
@@ -39,4 +40,11 @@ public interface UserInformationService {
     void delete(Long id);
 
     List<UserRoleFromDTO> selectByIdToRole(Long id);
+
+    /**
+     * 根据用户id查询用户权限
+     * @param id 用户id
+     * @return
+     */
+    List<JurisdictionInformationDTO> selectUserIdToAuthority(Long id);
 }

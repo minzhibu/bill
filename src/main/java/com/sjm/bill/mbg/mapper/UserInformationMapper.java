@@ -1,5 +1,6 @@
 package com.sjm.bill.mbg.mapper;
 
+import com.sjm.bill.dto.JurisdictionInformationDTO;
 import com.sjm.bill.dto.UserRoleFromDTO;
 import com.sjm.bill.mbg.model.UserInformation;
 import com.sjm.bill.mbg.model.UserInformationExample;
@@ -59,4 +60,12 @@ public interface UserInformationMapper {
      * @return
      */
     List<UserInformation> selectByLogin(@Param("accountNumber") String accountNumber,@Param("password") String password);
+
+
+    /**
+     * 根据用户id查询用户权限
+     * @param id 用户id
+     * @return
+     */
+    List<JurisdictionInformationDTO> selectUserIdToAuthority(@Param("id") Long id);
 }
