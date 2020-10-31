@@ -102,13 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sjm.bill.mbg.model.PersonalBillMain">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into PERSONAL_BILL_MAIN (CREATE_TIME, UPDATE_TIME, LABEL, 
+    insert into PERSONAL_BILL_MAIN (ID,CREATE_TIME, UPDATE_TIME, LABEL,
       TOTAL_AMOUT, BILL_NAME, USER_ID
       )
-    values (#{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{label,jdbcType=VARCHAR}, 
+    values (#{id},#{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{label,jdbcType=VARCHAR},
       #{totalAmout,jdbcType=DOUBLE}, #{billName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}
       )
   </insert>
