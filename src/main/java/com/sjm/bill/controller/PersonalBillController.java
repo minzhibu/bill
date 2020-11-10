@@ -16,8 +16,12 @@ public class PersonalBillController {
 
     @PostMapping("/")
     public CommonResult insert(@RequestBody PersonalBillDTO personalBillDTO){
-        personalBillService.insert(personalBillDTO);
-        return CommonResult.success(null);
+        if(personalBillService.insert(personalBillDTO)){
+            return CommonResult.success(null);
+        }else{
+            return CommonResult.validateFailed();
+        }
+
     }
 
 }

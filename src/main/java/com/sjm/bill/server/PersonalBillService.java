@@ -4,5 +4,5 @@ import com.sjm.bill.dto.PersonalBillDTO;
 
 public interface PersonalBillService {
 
-    void insert(PersonalBillDTO personalBillDTO);
+    boolean insert(PersonalBillDTO personalBillDTO);
 }
