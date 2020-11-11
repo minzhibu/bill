@@ -106,7 +106,7 @@
       TOTAL_AMOUT, BILL_NAME, USER_ID
       )
     values (#{id},#{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{label,jdbcType=VARCHAR},
-      #{totalAmout,jdbcType=DOUBLE}, #{billName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}
+      #{totalAmout,jdbcType=DOUBLE}, #{billName,jdbcType=VARCHAR}, #{userId}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sjm.bill.mbg.model.PersonalBillMain">

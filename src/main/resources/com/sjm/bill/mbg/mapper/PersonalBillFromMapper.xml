@@ -106,11 +106,11 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into PERSONAL_BILL_FROM (NAME, PRICE, AMOUNT, 
+    insert into PERSONAL_BILL_FROM (ID,NAME, PRICE, AMOUNT,
       MAIN_ID, LABEL, CREATE_TIME, 
       UPDATE_TIME)
-    values (#{name,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
-      #{mainId,jdbcType=BIGINT}, #{label,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+    values (id,#{name,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE},
+      #{mainId}, #{label,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE},
       #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.sjm.bill.mbg.model.PersonalBillFrom">
@@ -255,4 +255,16 @@
       UPDATE_TIME = #{updateTime,jdbcType=DATE}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+
+  <insert id="insertBatch">
+    insert into PERSONAL_BILL_FROM (ID,NAME, PRICE, AMOUNT,
+    MAIN_ID, LABEL, CREATE_TIME,
+    UPDATE_TIME)
+    values
+    <foreach collection="personalBillFroms" item="personalBillFrom" separator=",">
+      (#{personalBillFrom.id},#{personalBillFrom.name}, #{personalBillFrom.price}, #{personalBillFrom.amount},
+      #{personalBillFrom.mainId}, #{personalBillFrom.label}, #{personalBillFrom.createTime},
+      #{personalBillFrom.updateTime})
+    </foreach>
+  </insert>
 </mapper>

@@ -41,7 +41,7 @@ public class PersonalBillFrom implements Serializable {
      *
      * @mbggenerated
      */
-    private Long mainId;
+    private String mainId;
 
     /**
      * 标签
@@ -65,6 +65,5 @@ public class PersonalBillFrom implements Serializable {
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
-
 
 }

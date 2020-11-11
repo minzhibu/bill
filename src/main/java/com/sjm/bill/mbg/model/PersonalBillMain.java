@@ -1,15 +1,20 @@
 package com.sjm.bill.mbg.model;
 
+import lombok.Data;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
+@ToString
 public class PersonalBillMain implements Serializable {
     /**
      * 主键
      *
      * @mbggenerated
      */
-    private Long id;
+    private String id;
 
     /**
      * 创建时间
@@ -51,81 +56,7 @@ public class PersonalBillMain implements Serializable {
      *
      * @mbggenerated
      */
-    private Long userId;
+    private String userId;
 
-    private static final long serialVersionUID = 1L;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public Double getTotalAmout() {
-        return totalAmout;
-    }
-
-    public void setTotalAmout(Double totalAmout) {
-        this.totalAmout = totalAmout;
-    }
-
-    public String getBillName() {
-        return billName;
-    }
-
-    public void setBillName(String billName) {
-        this.billName = billName;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", label=").append(label);
-        sb.append(", totalAmout=").append(totalAmout);
-        sb.append(", billName=").append(billName);
-        sb.append(", userId=").append(userId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

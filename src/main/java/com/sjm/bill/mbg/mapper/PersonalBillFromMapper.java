@@ -2,8 +2,9 @@ package com.sjm.bill.mbg.mapper;
 
 import com.sjm.bill.mbg.model.PersonalBillFrom;
 import com.sjm.bill.mbg.model.PersonalBillFromExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PersonalBillFromMapper {
     int countByExample(PersonalBillFromExample example);
@@ -27,4 +28,11 @@ public interface PersonalBillFromMapper {
     int updateByPrimaryKeySelective(PersonalBillFrom record);
 
     int updateByPrimaryKey(PersonalBillFrom record);
+
+    /**
+     * 批量保存
+     * @param personalBillFroms
+     * @return
+     */
+    int insertBatch(@Param("personalBillFroms") List<PersonalBillFrom> personalBillFroms);
 }
