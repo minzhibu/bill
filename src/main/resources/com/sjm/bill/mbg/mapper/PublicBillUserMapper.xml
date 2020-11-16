@@ -176,4 +176,12 @@
       PUBLIC_BILL_ID = #{publicBillId,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+
+  <insert id="insertBatch">
+    insert into PUBLIC_BILL_USER (ID,USER_ID, PUBLIC_BILL_ID)
+    values
+    <foreach collection="publicBillUsers" item="publicBillUser" separator=",">
+      (#{publicBillUser.id},#{publicBillUser.userId}, #{publicBillUser.publicBillId})
+    </foreach>
+  </insert>
 </mapper>

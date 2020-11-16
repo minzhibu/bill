@@ -1,51 +1,19 @@
 package com.sjm.bill.mbg.model;
 
+import lombok.Data;
+import lombok.ToString;
+
 import java.io.Serializable;
-
+@Data
+@ToString
 public class PublicBillUser implements Serializable {
-    private Long id;
+    private String id;
 
-    private Long userId;
+    private String userId;
 
-    private Long publicBillId;
+    private String publicBillId;
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getPublicBillId() {
-        return publicBillId;
-    }
-
-    public void setPublicBillId(Long publicBillId) {
-        this.publicBillId = publicBillId;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", publicBillId=").append(publicBillId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

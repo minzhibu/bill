@@ -70,14 +70,14 @@ public class PersonalBillServiceImpl implements PersonalBillService {
         if(personalBillDTO == null){
             return false;
         }
-        if(StringCommon.isNotEmpty(personalBillDTO.getBillName()) && StringCommon.isNotEmpty(personalBillDTO.getLabel())
-                && personalBillDTO.getUserId() == null){
+        if(!StringCommon.isNotEmpty(personalBillDTO.getBillName()) || !StringCommon.isNotEmpty(personalBillDTO.getLabel())
+                || personalBillDTO.getUserId() == null){
             return false;
         }
         List<PersonalBillFrom> personalBillFromList = personalBillDTO.getPersonalBillFromList();
         for (PersonalBillFrom personalBillFrom : personalBillFromList) {
-            if (StringCommon.isNotEmpty(personalBillFrom.getLabel()) && StringCommon.isNotEmpty(personalBillFrom.getName())
-                    && personalBillFrom.getAmount() == null && personalBillFrom.getPrice() == null) {
+            if (!StringCommon.isNotEmpty(personalBillFrom.getLabel()) || !StringCommon.isNotEmpty(personalBillFrom.getName())
+                    || personalBillFrom.getAmount() == null || personalBillFrom.getPrice() == null) {
                 return false;
             }
         }

@@ -101,13 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sjm.bill.mbg.model.PublicBillMain">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into PUBLIC_BILL_MAIN (BILL_NAME, CREATE_TIME, UPDATE_TIME, 
+    insert into PUBLIC_BILL_MAIN (ID,BILL_NAME, CREATE_TIME, UPDATE_TIME,
       LABLE, TOTLE_AMOUT)
-    values (#{billName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
-      #{lable,jdbcType=VARCHAR}, #{totleAmout,jdbcType=DOUBLE})
+    values (#{id},#{billName}, #{createTime}, #{updateTime},
+      #{lable}, #{totleAmout})
   </insert>
   <insert id="insertSelective" parameterType="com.sjm.bill.mbg.model.PublicBillMain">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">

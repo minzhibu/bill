@@ -27,4 +27,6 @@ public interface PublicBillFromMapper {
     int updateByPrimaryKeySelective(PublicBillFrom record);
 
     int updateByPrimaryKey(PublicBillFrom record);
+
+    int insertBatch(@Param("publicBillFroms")List<PublicBillFrom> publicBillFroms);
 }

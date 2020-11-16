@@ -106,7 +106,7 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into PUBLIC_BILL_FROM (NAME, PRICE, AMOUNT, 
+    insert into PUBLIC_BILL_FROM (NAME, PRICE, AMOUNT,
       MAIN_ID, LABEL, CREATE_TIME, 
       UPDATE_TIME)
     values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{amount,jdbcType=DOUBLE}, 
@@ -255,4 +255,15 @@
       UPDATE_TIME = #{updateTime,jdbcType=DATE}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <insert id="insertBatch">
+    insert into PUBLIC_BILL_FROM (ID,NAME, PRICE, AMOUNT,
+    MAIN_ID, LABEL, CREATE_TIME,
+    UPDATE_TIME)
+    values
+    <foreach collection="publicBillFroms" item="publicBillFrom" separator=",">
+      (#{publicBillFrom.id},#{publicBillFrom.name}, #{publicBillFrom.price}, #{publicBillFrom.amount},
+      #{publicBillFrom.mainId}, #{publicBillFrom.label}, #{publicBillFrom.createTime},
+      #{publicBillFrom.updateTime})
+    </foreach>
+  </insert>
 </mapper>

@@ -27,4 +27,6 @@ public interface PublicBillUserMapper {
     int updateByPrimaryKeySelective(PublicBillUser record);
 
     int updateByPrimaryKey(PublicBillUser record);
+
+    int insertBatch(@Param("publicBillUsers") List<PublicBillUser> publicBillUsers);
 }
